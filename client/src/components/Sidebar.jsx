@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { RiDashboard3Line } from "react-icons/ri";
 import { BiSolidBookContent } from "react-icons/bi";
 import { RiBookMarkedLine } from "react-icons/ri";
@@ -82,10 +81,6 @@ const Sidebar = () => {
     </div>
     // </div>
   );
-};
-Sidebar.propTypes = {
-  tabOpen: PropTypes.string.isRequired,
-  setTabOpen: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

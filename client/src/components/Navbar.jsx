@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const Navbar = () => {
   return (
     <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2 px-2 py-1 bg-white w-[50%] md:w-full rounded-lg">
+      <div className="flex items-center gap-2 px-2 py-1 bg-white w-[60%] rounded-lg">
         <IoMdSearch size={24} />
         <input
           placeholder="Search your course"
@@ -16,8 +16,8 @@ const Navbar = () => {
           className="w-full border-0 outline-none p-2"
         />
       </div>
-      <div className="w-[50%] md:w-full flex items-center gap-6 justify-end text-gray-500">
-        <div className="flex items-center gap-8 justify-end  text-gray-500">
+      <div className="md:w-full flex items-center gap-6 justify-end text-gray-500">
+        <div className="items-center gap-8 justify-end  text-gray-500 hidden md:flex">
           <LuMessageSquareMore size={24} />
           <GoBell size={24} />
           <MdHelpOutline size={24} />
@@ -27,7 +27,9 @@ const Navbar = () => {
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <span className="text-lg font-semibold text-black">Adeliny</span>
+          <span className="text-lg font-semibold text-black hidden md:block">
+            Adeliny
+          </span>
         </div>
       </div>
     </div>

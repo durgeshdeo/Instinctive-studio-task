@@ -13,7 +13,7 @@ import { FiPlus } from "react-icons/fi";
 const TableList = () => {
   return (
     <div className="bg-white mt-8 rounded-lg">
-      <div className="w-full flex justify-between items-center p-4">
+      <div className="flex flex-col gap-4 md:flex md:flex-row md:justify-between md:items-center p-4 ">
         <div className="flex gap-2 items-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -53,8 +53,8 @@ const TableList = () => {
           Add Student
         </Button>
       </div>
-      <div className=" mt-6">
-        <table className="w-full divide-y divide-gray-200">
+      <div className="mt-6 w-full overflow-x-auto">
+        <table className="table-auto min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -79,22 +79,22 @@ const TableList = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             <tr>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
                 John Doe
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
                 AY-2023
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
                 Math, Science
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
                 01/01/2023
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
                 01/10/2023
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
                 Active
               </td>
             </tr>
