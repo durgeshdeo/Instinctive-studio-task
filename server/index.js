@@ -7,8 +7,15 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
+const corsOptions = process.env.CORS_ORIGIN || "*";
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [corsOptions],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 console.log("DATABASE_URL:", process.env.DATABASE_URL);
