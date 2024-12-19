@@ -9,8 +9,27 @@ import {
 import { Button } from "@/components/ui/button";
 import { FaChevronDown } from "react-icons/fa6";
 import { FiPlus } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const TableList = () => {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/");
+        setStudents(response.data);
+      } catch (error) {
+        console.error("Error fetching students:", error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  console.log(students);
+
   return (
     <div className="bg-white mt-8 rounded-lg">
       <div className="flex flex-col gap-4 md:flex md:flex-row md:justify-between md:items-center p-4 ">
@@ -53,7 +72,7 @@ const TableList = () => {
           Add Student
         </Button>
       </div>
-      <div className="mt-6 w-full overflow-x-auto">
+      <div className="mt-6 overflow-x-scroll container conatinerr mb-6">
         <table className="table-auto min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -77,28 +96,33 @@ const TableList = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            <tr>
-              <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
-                John Doe
-              </td>
-              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                AY-2023
-              </td>
-              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                Math, Science
-              </td>
-              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                01/01/2023
-              </td>
-              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                01/10/2023
-              </td>
-              <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                Active
-              </td>
-            </tr>
-          </tbody>
+          {students.map((student) => (
+            <tbody
+              key={student.id}
+              className="bg-white divide-y divide-gray-200"
+            >
+              <tr>
+                <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
+                  {student.name}
+                </td>
+                <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                  {student.cohort}
+                </td>
+                <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                  {student.courses.map((course) => course.name).join(", ")}
+                </td>
+                <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                  {student.dateJoined}
+                </td>
+                <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                  {student.lastLogin}
+                </td>
+                <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                  {student.status}
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
       </div>
     </div>

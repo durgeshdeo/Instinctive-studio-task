@@ -21,11 +21,10 @@ CREATE TABLE "Course" (
 -- CreateTable
 CREATE TABLE "_CourseToStudent" (
     "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
-);
+    "B" TEXT NOT NULL,
 
--- CreateIndex
-CREATE UNIQUE INDEX "_CourseToStudent_AB_unique" ON "_CourseToStudent"("A", "B");
+    CONSTRAINT "_CourseToStudent_AB_pkey" PRIMARY KEY ("A","B")
+);
 
 -- CreateIndex
 CREATE INDEX "_CourseToStudent_B_index" ON "_CourseToStudent"("B");

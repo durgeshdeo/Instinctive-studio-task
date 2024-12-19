@@ -30,7 +30,7 @@ const Sidebar = () => {
           {isOpen ? (
             <IoMdClose size={24} />
           ) : (
-            <div className="flex items-center justify-between w-[20rem]">
+            <div className="flex items-center gap-36">
               <FaBars size={24} />
               <span className="text-xl font-semibold">Quyl</span>
             </div>
