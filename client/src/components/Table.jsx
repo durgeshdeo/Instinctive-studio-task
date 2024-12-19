@@ -13,12 +13,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const TableList = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/");
+        const response = await axios.get(`${BASE_URL}`);
         setStudents(response.data);
       } catch (error) {
         console.error("Error fetching students:", error);
