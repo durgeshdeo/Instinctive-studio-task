@@ -20,7 +20,7 @@ const TableList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}`);
+        const response = await axios.get(`${BASE_URL}/students`);
         setStudents(response.data);
       } catch (error) {
         console.error("Error fetching students:", error);

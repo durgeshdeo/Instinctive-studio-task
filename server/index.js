@@ -13,7 +13,7 @@ app.use(express.json());
 
 console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
-app.use("/", studentRoutes);
+app.use("/students", studentRoutes);
 app.use("/courses", courseRoutes);
 
 app.get("/", (req, res) => {
