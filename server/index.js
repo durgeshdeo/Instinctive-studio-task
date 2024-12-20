@@ -7,17 +7,15 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : "*",
-  methods: ["POST", "GET"],
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : "*",
+//   methods: ["POST", "GET"],
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
-
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 app.use("/students", studentRoutes);
 app.use("/courses", courseRoutes);

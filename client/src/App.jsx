@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import TableList from "./components/Table";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Navbar />
         <TableList />
       </div>
+      <Toaster position="top-right" richColors />
     </div>
   );
 }

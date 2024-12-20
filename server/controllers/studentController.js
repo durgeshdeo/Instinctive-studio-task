@@ -41,3 +41,32 @@ export const createStudent = async (req, res) => {
     res.status(500).json({ error: "Failed to create students" });
   }
 };
+
+export const updateStudent = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  try {
+    const updatedStudent = await prisma.student.update({
+      where: { id: id },
+      data: { name },
+    });
+    res.status(200).json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update student name" });
+  }
+};
+
+export const deleteStudent = async (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+
+  try {
+    await prisma.student.delete({
+      where: { id: id },
+    });
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete student" });
+  }
+};

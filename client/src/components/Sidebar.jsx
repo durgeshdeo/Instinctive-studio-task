@@ -24,15 +24,17 @@ const Sidebar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <img src="/image.png" alt="" />
+          <img src="/Vector.svg" alt="" className="w-28 h-28" />
         </h2>
         <button className="block md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <IoMdClose size={24} />
           ) : (
-            <div className="flex items-center gap-36">
-              <FaBars size={24} />
-              <span className="text-xl font-semibold">Quyl</span>
+            <div className="flex gap-[8rem] ">
+              <div className="">
+                <FaBars size={24} />
+              </div>
+              <img src="/Vector.svg" alt="" className="w-12 h-12 -mt-3" />
             </div>
           )}
           {}
