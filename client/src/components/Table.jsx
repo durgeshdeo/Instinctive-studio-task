@@ -162,7 +162,7 @@ const TableList = () => {
                   {student.courses.map((course) => (
                     <div
                       key={course.id}
-                      className="text-center py-1 px-4 bg-gray-100"
+                      className="flex py-1 px-4 bg-gray-100 rounded-lg"
                     >
                       {course.name}
                     </div>
