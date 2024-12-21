@@ -11,6 +11,8 @@
 - **Client:** React JS
 - **Server:** Node JS
 - **Database:** Supabase
+- **ORM:** Prisma
+- **State Management:** Redux
 
 ## Screenshots of the application
 
