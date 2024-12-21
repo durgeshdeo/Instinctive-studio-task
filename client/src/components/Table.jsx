@@ -19,10 +19,13 @@ import {
   filterStudents,
 } from "../features/studentSlice";
 import AddStudentPopup from "./AddStudentPopup";
+import { BarLoader } from "react-spinners";
 
 const TableList = () => {
   const dispatch = useDispatch();
-  const { filteredStudents } = useSelector((state) => state.students);
+  const { loading: isLoading, filteredStudents } = useSelector(
+    (state) => state.students
+  );
 
   const [selectedCohort, setSelectedCohort] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
@@ -132,7 +135,7 @@ const TableList = () => {
           Add Student
         </Button>
       </div>
-      <div className="mt-6 overflow-x-scroll container conatinerr mb-6">
+      <div className="mt-6 overflow-x-scroll container conatinerr mb-6 min-h-[30rem]">
         <table className="table-auto min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -157,6 +160,12 @@ const TableList = () => {
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
             </tr>
           </thead>
+          {isLoading && (
+            <div className="w-full border border-solid border-black mx-auto">
+              <BarLoader className="mb-4" width={"615%"} color="#36d7b7" />
+            </div>
+          )}
+
           {filteredStudents?.map((student) => (
             <tbody
               key={student.id}
@@ -169,11 +178,11 @@ const TableList = () => {
                 <td className="px-6 py-4 whitespace-normal text-sm text-gray-500 ">
                   {student.cohort}
                 </td>
-                <td className="px-6 flex gap-2 py-4 whitespace-normal text-sm text-gray-500 ">
+                <td className="px-6  md:flex md:gap-2 py-4 whitespace-normal text-sm text-gray-500 ">
                   {student?.courses?.map((course) => (
                     <div
                       key={course.id}
-                      className="flex py-1 px-4 bg-gray-100 rounded-lg"
+                      className="py-1 px-4 bg-gray-100 rounded-lg"
                     >
                       {course.name}
                     </div>

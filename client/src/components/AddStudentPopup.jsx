@@ -36,12 +36,12 @@ const AddStudentPopup = ({ onClose }) => {
     defaultValues: {
       name: "",
       cohort: "AY 2024",
-      course: "Maths",
       status: "Active",
     },
   });
 
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -60,6 +60,7 @@ const AddStudentPopup = ({ onClose }) => {
   //   console.log(courses);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const modifiedData = {
       ...data,
       courseId: [data.course],
@@ -80,6 +81,8 @@ const AddStudentPopup = ({ onClose }) => {
     } catch (error) {
       console.error(error);
       toast("Error adding student");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -184,7 +187,9 @@ const AddStudentPopup = ({ onClose }) => {
             >
               Cancel
             </Button>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              {loading == true ? "Saving..." : "Save"}
+            </Button>
           </div>
         </form>
       </div>
