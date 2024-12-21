@@ -162,7 +162,7 @@ const TableList = () => {
           </thead>
           {isLoading && (
             <div className="w-full border border-solid border-black mx-auto">
-              <BarLoader className="mb-4" width={"615%"} color="#36d7b7" />
+              <BarLoader className="mb-4" width={"500%"} color="#36d7b7" />
             </div>
           )}
 

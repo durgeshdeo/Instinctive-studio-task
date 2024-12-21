@@ -1,6 +1,6 @@
 import { IoMdSearch } from "react-icons/io";
 import { LuMessageSquareMore } from "react-icons/lu";
-import { GoBell } from "react-icons/go";
+import { FiBell } from "react-icons/fi";
 import { MdHelpOutline } from "react-icons/md";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="md:w-full flex items-center gap-6 justify-end text-gray-500">
         <div className="items-center gap-8 justify-end  text-gray-500 hidden md:flex">
           <LuMessageSquareMore size={24} />
-          <GoBell size={24} />
+          <FiBell size={24} />
           <MdHelpOutline size={24} />
         </div>
         <div className="justify-end flex items-center gap-4">
