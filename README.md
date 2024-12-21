@@ -1,5 +1,11 @@
 # InstinctiveStudio_Task
 
+## Key Features
+- **CRUD Operations:** Implemented Create, Read, Update, and Delete functionality for seamless data management.
+- **Table Filtering:** Integrated filtering to enable quick and efficient data exploration.
+- **Redux Integration:** Utilized Redux for efficient and centralized state management during data fetching and updates.
+- **Responsive UI:** Designed a reusable and responsive UI using Tailwind CSS and ShadCN.
+
 ## Tech Stacks
 
 - **Client:** React JS
