@@ -15,6 +15,22 @@ export const fetchStudents = createAsyncThunk(
   }
 );
 
+export const createStudent = createAsyncThunk(
+  "students/createStudent",
+  async (studentData, { rejectWithValue }) => {
+    // console.log(studentData);
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/students/create`,
+        studentData
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteStudent = createAsyncThunk(
   "students/deleteStudent",
   async (id, { rejectWithValue }) => {
@@ -89,6 +105,19 @@ const studentsSlice = createSlice({
         state.filteredStudents = state.filteredStudents.map((student) =>
           student.id === id ? { ...student, name } : student
         );
+      })
+      .addCase(createStudent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createStudent.fulfilled, (state, action) => {
+        state.loading = false;
+        state.students.push(action.payload);
+        state.filteredStudents.push(action.payload);
+      })
+      .addCase(createStudent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

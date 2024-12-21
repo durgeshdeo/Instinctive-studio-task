@@ -18,6 +18,7 @@ import {
   updateStudent,
   filterStudents,
 } from "../features/studentSlice";
+import AddStudentPopup from "./AddStudentPopup";
 
 const TableList = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,11 @@ const TableList = () => {
   const [selectedCohort, setSelectedCohort] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModelOpen2, setIsModelOpen2] = useState(false);
+
+  const togglePopup = () => {
+    setIsModelOpen2(!isModelOpen2);
+  };
   const [currentStudent, setCurrentStudent] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
 
@@ -73,6 +79,8 @@ const TableList = () => {
     );
   };
 
+  // console.log(filteredStudents);
+
   return (
     <div className="bg-white mt-8 rounded-lg">
       <div className="flex flex-col gap-4 md:flex md:flex-row md:justify-between md:items-center p-4 ">
@@ -116,7 +124,10 @@ const TableList = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <Button className="bg-gray-600 hover:bg-gray-400 text-white">
+        <Button
+          className="bg-gray-600 hover:bg-gray-400 text-white"
+          onClick={() => setIsModelOpen2(true)}
+        >
           <FiPlus size={16} />
           Add Student
         </Button>
@@ -146,7 +157,7 @@ const TableList = () => {
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
             </tr>
           </thead>
-          {filteredStudents.map((student) => (
+          {filteredStudents?.map((student) => (
             <tbody
               key={student.id}
               className="bg-white divide-y divide-gray-200"
@@ -159,7 +170,7 @@ const TableList = () => {
                   {student.cohort}
                 </td>
                 <td className="px-6 flex gap-2 py-4 whitespace-normal text-sm text-gray-500 ">
-                  {student.courses.map((course) => (
+                  {student?.courses?.map((course) => (
                     <div
                       key={course.id}
                       className="flex py-1 px-4 bg-gray-100 rounded-lg"
@@ -230,6 +241,7 @@ const TableList = () => {
           </div>
         </div>
       )}
+      {isModelOpen2 && <AddStudentPopup onClose={togglePopup} />}
     </div>
   );
 };

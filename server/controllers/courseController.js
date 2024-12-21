@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 const getCourses = async (req, res) => {
   try {
     const courses = await prisma.course.findMany({
-      include: {
-        students: true,
-      },
+      // include: {
+      //   students: true,
+      // },
     });
     res.status(200).json(courses);
   } catch (error) {

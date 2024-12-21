@@ -8,16 +8,46 @@ export const getAllStudents = async (req, res) => {
       include: {
         courses: true,
       },
+      orderBy: {
+        dateJoined: "desc",
+      },
     });
     res.status(200).json(students);
-    console.log(students);
+    // console.log(students);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch students" });
   }
 };
 
-//used this to add dummy data to the database
 export const createStudent = async (req, res) => {
+  const { name, cohort, status, courseId } = req.body;
+
+  // console.log(req.body);
+
+  try {
+    const newStudent = await prisma.student.create({
+      data: {
+        name,
+        cohort,
+        status,
+        courses: {
+          connect: courseId.map((id) => ({ id })),
+        },
+      },
+      include: {
+        courses: true,
+      },
+    });
+
+    res.status(201).json(newStudent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to create student" });
+  }
+};
+
+//used this to add dummy data to the database
+export const createStudents = async (req, res) => {
   const studentsData = req.body;
 
   try {

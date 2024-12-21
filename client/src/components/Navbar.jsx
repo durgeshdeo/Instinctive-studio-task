@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const Navbar = () => {
   return (
     <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2 px-2 py-1 bg-white w-[60%] rounded-lg">
+      <div className="flex items-center gap-2 px-2 py-1 bg-white  md:w-[60%] rounded-lg">
         <IoMdSearch size={24} />
         <input
           placeholder="Search your course"
