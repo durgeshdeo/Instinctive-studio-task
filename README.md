@@ -5,7 +5,7 @@
 - **Table Filtering:** Integrated filtering to enable quick and efficient data exploration.
 - **Redux Integration:** Utilized Redux for efficient and centralized state management during data fetching and updates.
 - **Responsive UI:** Designed a reusable and responsive UI using Tailwind CSS and ShadCN.
-- **Pagiantion:** Integrated Pagination for efficient data exploration.
+- **Pagination:** Integrated Pagination for efficient data exploration.
 
 ## Tech Stacks
 
