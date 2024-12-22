@@ -112,8 +112,10 @@ const studentsSlice = createSlice({
       })
       .addCase(createStudent.fulfilled, (state, action) => {
         state.loading = false;
-        state.students.push(action.payload);
-        state.filteredStudents.push(action.payload);
+        state.students.unshift(action.payload); // Add to top
+        state.filteredStudents = [...state.students].sort(
+          (a, b) => new Date(b.dateJoined) - new Date(a.dateJoined)
+        );
       })
       .addCase(createStudent.rejected, (state, action) => {
         state.loading = false;

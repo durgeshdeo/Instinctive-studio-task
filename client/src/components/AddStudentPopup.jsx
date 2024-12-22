@@ -11,15 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ReactSelect from "react-select";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { createStudent } from "../features/studentSlice";
 import { useDispatch } from "react-redux";
-
 const studentSchema = z.object({
   name: z.string().min(1, "Name is required"),
   cohort: z.enum(["AY 2024", "AY 2025"], "Cohort is required"),
-  course: z.string().min(1, "Course is required"),
+  course: z.array(z.string()).min(1, "Course is required"),
   status: z.enum(["Active", "Inactive"], "Status is required"),
 });
 
@@ -36,6 +36,7 @@ const AddStudentPopup = ({ onClose }) => {
     defaultValues: {
       name: "",
       cohort: "AY 2024",
+      course: [],
       status: "Active",
     },
   });
@@ -57,26 +58,21 @@ const AddStudentPopup = ({ onClose }) => {
     fetchCourses();
   }, []);
 
-  //   console.log(courses);
-
   const onSubmit = async (data) => {
     setLoading(true);
     const modifiedData = {
       ...data,
-      courseId: [data.course],
+      courseId: data.course,
     };
-    // console.log(modifiedData);
 
     try {
       const result = await dispatch(createStudent(modifiedData));
-
-      //   console.log(result);
 
       if (result.type === "students/createStudent/fulfilled") {
         onClose();
         toast("Student added successfully");
       } else {
-        toast("Error adding student hrere");
+        toast("Error adding student");
       }
     } catch (error) {
       console.error(error);
@@ -133,21 +129,19 @@ const AddStudentPopup = ({ onClose }) => {
             <label htmlFor="course" className="block text-sm font-medium mb-2">
               Course
             </label>
-            <Select
-              onValueChange={(value) => setValue("course", value)}
-              defaultValue="Maths"
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select course" />
-              </SelectTrigger>
-              <SelectContent>
-                {courses.map((course) => (
-                  <SelectItem key={course.id} value={course.id}>
-                    {course.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <ReactSelect
+              isMulti
+              onChange={(selectedOptions) =>
+                setValue(
+                  "course",
+                  selectedOptions.map((option) => option.value)
+                )
+              }
+              options={courses.map((course) => ({
+                value: course.id,
+                label: course.name,
+              }))}
+            />
             {errors.course && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.course.message}

@@ -18,6 +18,14 @@ import {
   updateStudent,
   filterStudents,
 } from "../features/studentSlice";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import AddStudentPopup from "./AddStudentPopup";
 import { BarLoader } from "react-spinners";
 
@@ -31,6 +39,9 @@ const TableList = () => {
   const [selectedCourse, setSelectedCourse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModelOpen2, setIsModelOpen2] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   const togglePopup = () => {
     setIsModelOpen2(!isModelOpen2);
@@ -84,14 +95,21 @@ const TableList = () => {
 
   // console.log(filteredStudents);
 
+  const totalPages = Math.ceil(filteredStudents.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedStudents = filteredStudents.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
-    <div className="bg-white mt-8 rounded-lg">
+    <div className="bg-white mt-8 rounded-lg pb-8">
       <div className="flex flex-col gap-4 md:flex md:flex-row md:justify-between md:items-center p-4 ">
         <div className="flex gap-2 items-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">
-                Select Cohort
+                {selectedCohort || "Select Cohort"}
                 <FaChevronDown size={16} />
               </Button>
             </DropdownMenuTrigger>
@@ -110,7 +128,7 @@ const TableList = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">
-                Courses
+                {selectedCourse || "Select Course"}
                 <FaChevronDown size={16} />
               </Button>
             </DropdownMenuTrigger>
@@ -135,7 +153,7 @@ const TableList = () => {
           Add Student
         </Button>
       </div>
-      <div className="mt-6 overflow-x-scroll container conatinerr mb-6 min-h-[30rem]">
+      <div className="mt-6  overflow-x-scroll md:overflow-visible container conatinerr mb-6 min-h-[30rem]">
         <table className="table-auto min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -165,8 +183,13 @@ const TableList = () => {
               <BarLoader className="mb-4" width={"500%"} color="#36d7b7" />
             </div>
           )}
+          {/* {!isLoading && filteredStudents.length === 0 && (
+            <div className="text-center text-gray-500 mt-4">
+              No students found.
+            </div>
+          )} */}
 
-          {filteredStudents?.map((student) => (
+          {paginatedStudents?.map((student) => (
             <tbody
               key={student.id}
               className="bg-white divide-y divide-gray-200"
@@ -182,7 +205,7 @@ const TableList = () => {
                   {student?.courses?.map((course) => (
                     <div
                       key={course.id}
-                      className="py-1 px-4 bg-gray-100 rounded-lg"
+                      className=" flex gap-2 mt-1 py-1 px-4 bg-gray-100 rounded-lg"
                     >
                       {course.name}
                     </div>
@@ -227,6 +250,32 @@ const TableList = () => {
           ))}
         </table>
       </div>
+      <Pagination className="mt-2">
+        <PaginationPrevious
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          Previous
+        </PaginationPrevious>
+        <PaginationContent>
+          {[...Array(totalPages)].map((_, index) => (
+            <PaginationItem key={index}>
+              <PaginationLink
+                active={currentPage === index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+        </PaginationContent>
+        <PaginationNext
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </PaginationNext>
+      </Pagination>
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-lg">
